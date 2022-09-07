@@ -126,17 +126,17 @@ class fantasy_crawler:
         return players_stats_grouped
         
         
-    def store_data(self, file_name = 'NFL'):
+    def store_data(self, file_name = 'NFL',target_dir='raw_data'):
         #store data by: {sport}/{position} -> df by {player}/{year}
         grouped_history = self.group_player_history()
         
         # group_name = r'qb' ###################################################CHANGE THIS IN FINAL RUN
-        group_name = self.bs.find('li', {'class', 'active'}).text
+        group_name = self.bs.find('li', {'class', 'active'}).text # 'QB','TE',etc...
         
         
         #Build folder to store data in
         current_directory = os.getcwd()
-        final_directory = os.path.join(current_directory, group_name)
+        final_directory = os.path.join(current_directory, target_dir, group_name)
         if not os.path.exists(final_directory):
            os.makedirs(final_directory)
         
